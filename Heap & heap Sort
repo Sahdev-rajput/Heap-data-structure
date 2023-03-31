@@ -1,0 +1,111 @@
+#include <iostream>
+using namespace std;
+void create(int A[], int n)
+{
+	int i, temp;
+	temp = A[n];
+	i = n;
+	while (i > 1 && A[i / 2] < temp)
+	{
+		A[i] = A[i/2];
+		i = i / 2;
+	}
+	A[i] = temp;
+}
+void create_HEap(int num[], int n)
+{
+	int i = n, temp;
+	temp = num[i];
+	while (i != 0 && num[i / 2] < temp)
+	{
+		num[i] = num[i / 2];
+		i = i / 2;
+	}
+	num[i] = temp;
+}
+void Delete(int A[], int n)
+{
+	int i, j;
+	int temp = A[1];
+	A[1] = A[n];
+	A[n] = temp;
+	i = 1;
+	j = 2 * i;
+	while (j < n - 1)
+	{
+		if (A[j + 1] > A[j])
+		{
+			j = j + 1;
+		}
+		if (A[j] > A[i])
+		{
+			temp = A[i];
+			A[i] = A[j];
+			A[j] = temp;
+			i = j;
+			j = 2 * i;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void Delete_heap(int num[], int n)
+{
+	int i, j, temp;
+	temp = num[n];
+	num[n] = num[0];
+	num[0] = temp;
+	i = 0, j = 2*i;
+	while (j < n - 1)
+	{
+		if (num[j + 1] > num[j])
+		{
+			j = j + 1;
+		}
+		if (num[j] > num[i])
+		{
+			num[i] = num[j];
+			num[j] = temp;
+			i = j;
+			j = 2 * i;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+int main()
+{
+	int A[] = {1,2,3,4};
+	/*for (int i = 1; i < 8; i++)
+	{
+		create(A, i);
+	}*/
+	for (int i = 0; i < 4; i++)
+	{
+		create_HEap(A, i);
+	}
+	/*int p = 2;
+	int k = 2;
+	while (k > 0)
+	{
+		Delete_heap(A, p);
+		p--;
+		k--;
+	}
+	int n = 7;*/
+	//Delete_heap(A, 2);
+	//Delete_heap(A, 1);
+	/*while (n != 1)
+	{
+		Delete(A, n);
+		n--;
+	}*/
+	for (int i = 0; i < 4; i++)
+	{
+		cout << A[i] << " ";
+	}
+}
